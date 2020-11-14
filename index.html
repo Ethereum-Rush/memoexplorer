@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css" integrity="sha512-ZRv40llEogRmoWgZwnsqke3HNzJ0kiI0+pcMgiz2bxO6Ew1DVBtWjVn0qjrXdT3+u+pSN36gLgmJiiQ3cQtyzA==" crossorigin="anonymous" />
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script  src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ethereum-blockies@0.1.1/blockies.min.js"></script>
+  <!-- JS codes start-->
+  <script>
+
+const web3 = new Web3('https://mainnet.infura.io/v3/914bc8ee83c746a9801f4a57f0432aff');
+
+var globalGwei = "1";
+var myaddress = "0x34a17418cEC67B82D08Cf77A987941F99DC87c6b";
+const contractaddress = "0x3cC5EB07E0e1227613F1DF58f38b549823d11cB9"
+const cabi = JSON.parse('[{"inputs":[{"internalType":"uint256","name":"initialSupply","type":"uint256"},{"internalType":"string","name":"tokenName","type":"string"},{"internalType":"string","name":"tokenSymbol","type":"string"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"_owner","type":"address"},{"indexed":true,"internalType":"address","name":"_spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"_value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Burn","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_spender","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_spender","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"},{"internalType":"bytes","name":"_extraData","type":"bytes"}],"name":"approveAndCall","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"mineamount","type":"uint256"}],"name":"becameaminer","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"burn","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_from","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"burnFrom","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_addr","type":"address"}],"name":"checkAddrMinerAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_addr","type":"address"}],"name":"checkAddrMinerStatus","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"checkRewardStatus","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_addr","type":"address"},{"internalType":"uint256","name":"_index","type":"uint256"}],"name":"checkmemopurchases","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"string","name":"","type":"string"},{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"fundsWallet","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"genesisReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_bnumber","type":"uint256"}],"name":"getDailyReward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getactiveminersnumber","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getblockhash","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getmaximumAverage","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_addr","type":"address"}],"name":"getmemotextcountforaddr","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_blocknumber","type":"uint256"}],"name":"getspesificblockhash","outputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getyourcoinsbackafterthreemonths","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"lastBlock","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"maximumTarget","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"nAddrHash","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"nRewarMod","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"nWtime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"numberofminer","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"premined","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"rewardTimes","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"address","name":"_to","type":"address"},{"internalType":"string","name":"_memo","type":"string"}],"name":"sendtokenwithmemo","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_bnumber","type":"uint256"}],"name":"signfordailyreward","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_from","type":"address"},{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"stateMutability":"nonpayable","type":"function"}]');
+
+var eRushCont = new web3.eth.Contract(cabi, contractaddress, { from: myaddress, gasPrice: web3.utils.toWei(globalGwei, 'gwei')});
+eRushCont.options.gasPrice = '10';
+eRushCont.options.gas = 1000000;
+var contractInstance = eRushCont;
+
+function searchboxify(_addr) {
+  console.log("hereisworks");
+  var getTotalProducts = eRushCont.methods.getmemotextcountforaddr(_addr).call().then(function(result){
+                 //the result holds your Token Balance that you can assign to a var
+                  console.log(result);
+                 var myray = [...Array(result).keys()];
+
+                         for (i = 0; i < result; i++) {
+                            console.log("xxx",i);
+                            eRushCont.methods.checkmemopurchases(_addr,i).call().then(function(result){
+                              //console.log("resolt", result);
+                              console.log(result);
+
+                              $("#products").prepend('<tr>'+
+                                '<th><figure class="image is-48x48"><img class="is-rounded '+result[3]+'" src=""></figure></th>'+
+                                '<td> <a href="https://etherscan.io/address/' + result[3] +'" target="_blank"> '+result[3].substring(1, 8)+'...' + '<a/></td>'+
+                                '<td>'+
+                                 result[2]+
+                                '</td>'+
+                              '</tr>');
+                   var icon = blockies.create({ // All options are optional
+                       seed: result[3], // seed used to generate icon data, default: random
+                       //color: '#dfe', // to manually specify the icon color, default: random
+                       //bgcolor: '#aaa', // choose a different background color, default: random
+                       size: 15, // width/height of the icon in blocks, default: 8
+                       scale: 3, // width/height of each block in pixels, default: 4
+                       //spotcolor: '#000' // each pixel has a 13% chance of being of a third color,
+                       // default: random. Set to -1 to disable it. These "spots" create structures
+                       // that look like eyes, mouths and noses.
+                     });
+                     console.log(icon);
+                     $("."+result[3]).attr('src', icon.toDataURL());
+                     });}});
+}
+
+
+
+</script>
+  <!--JS codes end-->
+  <title>eRsuh memo explorer</title>
+  <link href='https://fonts.googleapis.com/css?family=Nunito Sans' rel='stylesheet'>
+  <style>
+  html {
+    background:#2A1D22;
+  }
+  .table {
+    background-color:#2b1e23;
+    border-radius: 10px;
+
+    -moz-box-shadow:    inset 0 0 6px #000000;
+    -webkit-box-shadow: inset 0 0 6px #000000;
+    box-shadow:
+  }
+  .table td  {
+    color:white;
+    font-family: 'Nunito Sans';font-size: 18px;
+  }
+
+  .table thead th  {
+    color:white;
+    font-family: 'Nunito Sans';font-size: 18px;
+  }
+
+
+
+  .title  {
+    color:white;
+    font-family: 'Nunito Sans';font-size: 18px;
+  }
+
+  .titletwo  {
+    color:white;
+    font-family: 'Nunito Sans';font-size: 23px;
+  }
+  .subtitle {
+    color:white;
+    font-family: 'Nunito Sans';font-size: 18px;
+  }
+  </style>
+</head>
+<body>
+ <section class="section">
+   <div class="container">
+  <center><img style="width:100px;" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/new-moon-face_1f31a.png"></center>
+  <center><p class="titletwo">Welcome to ethereum eRush explorer</p><center><br>
+
+    <div class="field">
+       <div class="control">
+         <input id="searchbox" class="input is-primary" style="width:500px;" type="text" placeholder="Search eer address">
+       </div>
+          </p>
+        </div>
+        <br>
+
+
+   <table class="table">
+     <tbody id="products">
+
+     </tbody>
+   </table>
+ </div>
+ </section>
+
+
+
+<script>
+$(document).ready(function() {
+$('#searchbox').bind("enterKey",function(e){
+   //do stuff here
+   var x = $('#searchbox').val();
+   console.log(x);
+   searchboxify(x);
+
+
+});
+$('#searchbox').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+        $(this).trigger("enterKey");
+        console.log("twitter2");
+    }
+});
+
+});
+</script>
+
+
+
+ </body>
+</html>
