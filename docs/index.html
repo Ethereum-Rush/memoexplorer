@@ -41,8 +41,14 @@ function searchboxify(_addr) {
                                 '<th><figure class="image is-48x48"><img class="is-rounded '+result[3]+'" src=""></figure></th>'+
                                 '<td> <a href="https://etherscan.io/address/' + result[3] +'" target="_blank"> '+result[3].substring(1, 8)+'...' + '<a/></td>'+
                                 '<td>'+
+                                 web3.utils.fromWei(result[1], "ether")+ '-EER'+
+                                '</td>'+
+                                '<td>'+
                                  result[2]+
                                 '</td>'+
+
+
+
                               '</tr>');
                    var icon = blockies.create({ // All options are optional
                        seed: result[3], // seed used to generate icon data, default: random
@@ -98,6 +104,16 @@ function searchboxify(_addr) {
     color:white;
     font-family: 'Nunito Sans';font-size: 23px;
   }
+  .titlethree  {
+    color:white;
+    font-family: 'Nunito Sans';font-size: 13px;
+  }
+  .titlethree a{
+    color:#1FC7D4;
+    font-family: 'Nunito Sans';font-size: 13px;
+  }
+
+
   .subtitle {
     color:white;
     font-family: 'Nunito Sans';font-size: 18px;
@@ -109,6 +125,7 @@ function searchboxify(_addr) {
    <div class="container">
   <center><img style="width:100px;" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/271/new-moon-face_1f31a.png"></center>
   <center><p class="titletwo">Welcome to ethereum eRush explorer</p><center><br>
+    <center><p class="titlethree">Also you can send memo with <a href="https://ethereum-rush.github.io/memosender/" target="_blank">memosender</a></p><center><br>
 
     <div class="field">
        <div class="control">
